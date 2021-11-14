@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class TalkModel(models.Model):
+    inputWord = models.CharField(max_length=100)
+    outputWord = models.CharField(max_length=200)
