@@ -7,3 +7,7 @@ class TalkModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = TalkModel
         fields = ('inputWord','outputWord')
+
+class TalkAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ()
