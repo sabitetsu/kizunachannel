@@ -1,1 +1,1 @@
-web: gunicorn kizunachannel.wsgi
+web: gunicorn myproject.wsgi

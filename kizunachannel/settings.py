@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'talkapp',
     'rest_framework',
-    'webpack_loader',
     'webpage.apps.WebpageConfig',
 ]
 
