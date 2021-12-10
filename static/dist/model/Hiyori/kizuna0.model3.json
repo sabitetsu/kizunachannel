@@ -11,12 +11,15 @@
 	"Groups": [
 		{
 			"Target": "Parameter",
-			"Name": "LipSync",
-			"Ids": []
+			"Name": "EyeBlink",
+			"Ids": [
+				"PARAM_EYE_L_OPEN",
+				"PARAM_EYE_R_OPEN"
+			]
 		},
 		{
 			"Target": "Parameter",
-			"Name": "EyeBlink",
+			"Name": "LipSync",
 			"Ids": []
 		}
 	]

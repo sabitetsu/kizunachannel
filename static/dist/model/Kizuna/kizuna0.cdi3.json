@@ -2,9 +2,9 @@
 	"Version": 3,
 	"Parameters": [
 		{
-			"Id": "PARAM_ANGLE_X",
+			"Id": "PARAM_5",
 			"GroupId": "",
-			"Name": "角度 X"
+			"Name": "角度X"
 		},
 		{
 			"Id": "PARAM_ANGLE_Y",
@@ -82,7 +82,7 @@
 			"Name": "左眉　変形"
 		},
 		{
-			"Id": "PARAM_BROW_R_FORM",
+			"Id": "PARAM_2",
 			"GroupId": "",
 			"Name": "右眉　変形"
 		},
@@ -122,19 +122,24 @@
 			"Name": "呼吸"
 		},
 		{
-			"Id": "PARAM_HAIR_FRONT",
+			"Id": "PARAM",
 			"GroupId": "",
-			"Name": "髪揺れ　前"
+			"Name": "髪揺れ前"
 		},
 		{
-			"Id": "PARAM_HAIR_SIDE",
+			"Id": "PARAM_6",
 			"GroupId": "",
-			"Name": "髪揺れ　横"
+			"Name": "あほげ"
 		},
 		{
-			"Id": "PARAM_HAIR_BACK",
+			"Id": "PARAM_3",
 			"GroupId": "",
-			"Name": "髪揺れ　後"
+			"Name": "髪揺れ横"
+		},
+		{
+			"Id": "PARAM_4",
+			"GroupId": "",
+			"Name": "髪揺れ後"
 		}
 	],
 	"ParameterGroups": [],
@@ -160,16 +165,26 @@
 			"Name": "顔"
 		},
 		{
+			"Id": "PARTS_8",
+			"Name": "耳"
+		},
+		{
 			"Id": "PARTS_3",
 			"Name": "髪型"
 		},
 		{
 			"Id": "PARTS_7",
 			"Name": "目元"
-		},
-		{
-			"Id": "PARTS_8",
-			"Name": "耳"
 		}
+	],
+	"CombinedParameters": [
+		[
+			"PARAM_5",
+			"PARAM_ANGLE_Y"
+		],
+		[
+			"PARAM_EYE_BALL_X",
+			"PARAM_EYE_BALL_Y"
+		]
 	]
 }
