@@ -5,8 +5,6 @@ from rest_framework import routers, views
 from . import views
 from talkapp.views import TalkModelViewSet, talkAPI, wordRegist, kizuna
 
-
-
 router = routers.DefaultRouter()
 router.register(r'talkmodel', TalkModelViewSet)
 

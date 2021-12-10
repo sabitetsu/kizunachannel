@@ -23,8 +23,9 @@ def wordRegist(request):
     return render(request, 'talkapp/wordregist.html', {'query': queryword})
 
 def kizuna(request):
+    print("post")
     API_key = env('API_KEY')
-    word = "やあ"
+    word = "ねむい"
     if request.POST.get('word'):
         word = request.POST.get('word')
     url = 'https://api.a3rt.recruit.co.jp/talk/v1/smalltalk'
@@ -32,13 +33,29 @@ def kizuna(request):
         'apikey':API_key,
         'query':word
     }
-    r = requests.post(url, query)
-    try:
-        result = [r.json()['results'][0]['reply']]
-    except:
-        result = ["よくわかんないです"]
 
-    return render(request, 'talkapp/kizuna.html', {'reply': result[0]})
+    friendry = 100
+    reply = 'error'
+    if friendry > 80:
+        try:
+            entries = TalkModel.objects.values('outputWord').filter(inputWord=word)
+            reply = entries[0]["outputWord"]
+        except:
+            r = requests.post(url, query)
+            try:
+                result = [r.json()['results'][0]['reply']]
+                reply = result[0]
+            except:
+                reply = "よくわかんないです"
+    else:
+        r = requests.post(url, query)
+        try:
+            result = [r.json()['results'][0]['reply']]
+            reply = result[0]
+        except:
+            reply = "よくわかんないです"
+
+    return render(request, 'talkapp/kizuna.html', {'reply': reply})
 
 def talkAPI(request):
     print("talkAPI request")
