@@ -4,13 +4,14 @@ from requests.models import Response
 from rest_framework import serializers, viewsets, filters
 import talkapp
 
-from .models import TalkModel
+from .models import TalkModel, UserModel, UserLike
 from .serializer import TalkAPISerializer, TalkModelSerializer
 
 from django.shortcuts import render
 import requests
 import environ
 # import json
+import re
 
 env = environ.Env()
 env.read_env('.env')
@@ -22,24 +23,44 @@ def wordRegist(request):
         queryword = request.GET['regword']
     return render(request, 'talkapp/wordregist.html', {'query': queryword})
 
+
 def kizuna(request):
+    userID = 1
+    user = UserModel.objects.get(pk=userID)
     print("post")
     API_key = env('API_KEY')
-    word = "ねむい"
+    word = "おはよう"
+    
     if request.POST.get('word'):
         word = request.POST.get('word')
+    if request.POST.get('friendship'):
+        user.friendry = int(request.POST.get('friendship'))
+        user.save()
+    
+    try:
+        friendry = UserModel.objects.values('friendry').get(pk=userID)
+        friendship = friendry['friendry']
+    except:
+        friendship = 0
     url = 'https://api.a3rt.recruit.co.jp/talk/v1/smalltalk'
     query = {
         'apikey':API_key,
         'query':word
     }
 
-    friendry = 100
+    
     reply = 'error'
-    if friendry > 80:
+    if friendship > 80:
         try:
             entries = TalkModel.objects.values('outputWord').filter(inputWord=word)
-            reply = entries[0]["outputWord"]
+            print(entries[0])
+            result = entries[0]["outputWord"]
+            pattern = re.compile(r'\[name\]')
+            if pattern:
+                userInfo = UserModel.objects.values('name').get(pk=userID)
+                reply = pattern.sub(userInfo['name'], result)
+            else:
+                reply = result
         except:
             r = requests.post(url, query)
             try:
@@ -55,7 +76,10 @@ def kizuna(request):
         except:
             reply = "よくわかんないです"
 
-    return render(request, 'talkapp/kizuna.html', {'reply': reply})
+    userInfo = UserModel.objects.values("name","old").get(pk=1)
+    print(friendship)
+    name = userInfo["name"]
+    return render(request, 'talkapp/kizuna.html', {'reply': reply, 'friendship': str(friendship)})
 
 def talkAPI(request):
     print("talkAPI request")

@@ -89,6 +89,17 @@
         padding: 0;
         font-size: 30px;
       }
+      .fs-box{
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+      }
+      .fs input{
+        width: 50px;
+        height: 50px;
+      }
     </style>
   </head>
   <body>
@@ -100,6 +111,15 @@
         </div>
       </form>
     </div>
+    <span class="fs-box">
+      <form action="{% url 'kizuna' %}" method="POST">
+        {% csrf_token %}
+        <div class="fs">
+          <span>{{ friendship }}</span>
+          <input name="friendship" type="text" id="friendship" />
+        </div>
+      </form>
+    </span>
 
     <div class="model">
       <canvas id="canvas"></canvas>
